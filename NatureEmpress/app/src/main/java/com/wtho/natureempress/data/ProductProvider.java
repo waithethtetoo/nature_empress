@@ -80,6 +80,10 @@ public class ProductProvider extends ContentProvider {
    private Uri insertProduct(Uri uri, ContentValues values) {
       SQLiteDatabase database = dbHelper.getWritableDatabase();
       long id = database.insert(ProductEntry.TABLE_NAME, null, values);
+      String price = values.getAsString(ProductEntry.COLUMN_PRODUCT_PRICE);
+      if (price == null) {
+         throw new IllegalArgumentException("Product requires price");
+      }
       if (id == -1) {
          Log.e(LOG_TAG, "Fail to insert row " + uri);
          return null;
@@ -93,7 +97,16 @@ public class ProductProvider extends ContentProvider {
    }
 
    @Override
-   public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
+   public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String selection, @Nullable String[] selectionArgs) {
+      int match=sUriMatcher.match(uri);
+      switch (match){
+         case PRODUCTS:
+            break;
+         case PRODUCT_ID:
+            break;
+         default:
+            throw new IllegalArgumentException("Inserting is not supported URI " + uri);
+      }
       return 0;
    }
 }
