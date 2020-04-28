@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Nature Empress</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Price</string>
+    <string name="units">Kyats</string>
+    <string name="product_size">Size</string>
+    <string name="action_save">Save</string>
+    <string name="action_delete">Delete</string>
+
+
+    <string name="shampoo">Herbal Green Tea Shampoo</string>
+    <string name="coffee_soap">Coffee Soap</string>
+    <string name="white_rice_soap">White Rice Soap</string>
+    <string name="brown_rice_soap">Brown Rice Soap</string>
+    <string name="turmeric_soap">Turmeric Soap</string>
+    <string name="aloe_vera_soap">Aloe Vera Soap</string>
+    <string name="potato_soap">Potato Soap</string>
+    <string name="orange_soap">Orange</string>
+    <string name="tamarind_soap">Tamarind Soap</string>
+
+    <string name="big_size">Big</string>
+    <string name="small_size">Small</string>
+    <string name="ml">250ml</string>
+</resources>

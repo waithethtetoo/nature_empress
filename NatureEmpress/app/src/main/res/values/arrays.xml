@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- These are the options displayed in the product drop-down Spinner -->
+    <string-array name="array_product_options">
+        <item>@string/shampoo</item>
+        <item>@string/coffee_soap</item>
+        <item>@string/white_rice_soap</item>
+        <item>@string/brown_rice_soap</item>
+        <item>@string/turmeric_soap</item>
+        <item>@string/aloe_vera_soap</item>
+        <item>@string/potato_soap</item>
+        <item>@string/orange_soap</item>
+        <item>@string/tamarind_soap</item>
+    </string-array>
+    <!-- These are the options displayed in the product size drop-down Spinner -->
+    <string-array name="array_product_size">
+        <item>@string/big_size</item>
+        <item>@string/small_size</item>
+        <item>@string/ml</item>
+    </string-array>
+</resources>
