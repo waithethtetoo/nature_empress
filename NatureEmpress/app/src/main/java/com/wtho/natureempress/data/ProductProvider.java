@@ -1,13 +1,17 @@
 package com.wtho.natureempress.data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import com.wtho.natureempress.data.ProductContract.ProductEntry;
 
 public class ProductProvider extends ContentProvider {
    private ProductDbHelper dbHelper;
@@ -31,8 +35,25 @@ public class ProductProvider extends ContentProvider {
 
    @Nullable
    @Override
-   public Cursor query(@NonNull Uri uri, @Nullable String[] strings, @Nullable String s, @Nullable String[] strings1, @Nullable String s1) {
-      return null;
+   public Cursor query(@NonNull Uri uri, @Nullable String[] projection, @Nullable String selection, @Nullable String[] selectionArgs, @Nullable String order) {
+      Cursor cursor;
+      SQLiteDatabase database = dbHelper.getWritableDatabase();
+      int match = sUriMatcher.match(uri);
+      switch (match) {
+         case PRODUCTS:
+            cursor = database.query(ProductEntry.TABLE_NAME,
+                    projection, selection, selectionArgs, null, null, order);
+            break;
+         case PRODUCT_ID:
+            selection = ProductEntry._ID + "+?";
+            selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+            cursor = database.query(ProductEntry.TABLE_NAME,
+                    projection, selection, selectionArgs, null, null, order);
+            break;
+         default:
+            throw new IllegalArgumentException("Cannot query unknown URI " + uri);
+      }
+      return cursor;
    }
 
    @Nullable
