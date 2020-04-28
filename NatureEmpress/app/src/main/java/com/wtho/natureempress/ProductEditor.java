@@ -14,13 +14,15 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.wtho.natureempress.data.ProductContract.ProductEntry;
+
 public class ProductEditor extends AppCompatActivity {
 
    private Spinner spinner_product;
    private EditText edtPrice;
    private Spinner spinner_size;
-   private int mProduct = 0;
-   private int mSize = 0;
+   private int mProduct = ProductEntry.PRODUCT_UNKNOWN;
+   private int mSize = ProductEntry.SIZE_UNKNOWN;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -46,30 +48,30 @@ public class ProductEditor extends AppCompatActivity {
             String selection = (String) adapterView.getItemAtPosition(position);
             if (!TextUtils.isEmpty(selection)) {
                if (selection.equals(getString(R.string.shampoo))) {
-                  mProduct = 1;
+                  mProduct = ProductEntry.PRODUCT_SHAMPOO;
                } else if (selection.equals(getString(R.string.coffee_soap))) {
-                  mProduct = 2;
+                  mProduct = ProductEntry.PRODUCT_COFFEE_SOAP;
                } else if (selection.equals(getString(R.string.white_rice_soap))) {
-                  mProduct = 3;
+                  mProduct = ProductEntry.PRODUCT_WHITE_RICE_SOAP;
                } else if (selection.equals(getString(R.string.brown_rice_soap))) {
-                  mProduct = 4;
+                  mProduct = ProductEntry.PRODUCT_BROWN_RICE_SOAP;
                } else if (selection.equals(getString(R.string.turmeric_soap))) {
-                  mProduct = 5;
+                  mProduct = ProductEntry.PRODUCT_TURMERIC_SOAP;
                } else if (selection.equals(getString(R.string.aloe_vera_soap))) {
-                  mProduct = 6;
+                  mProduct = ProductEntry.PRODUCT_ALOE_VERA_SOAP;
                } else if (selection.equals(getString(R.string.potato_soap))) {
-                  mProduct = 7;
+                  mProduct = ProductEntry.PRODUCT_POTATO_SOAP;
                } else if (selection.equals(getString(R.string.orange_soap))) {
-                  mProduct = 8;
+                  mProduct = ProductEntry.PRODUCT_ORANGE_SOAP;
                } else if (selection.equals(getString(R.string.tamarind_soap))) {
-                  mProduct = 9;
+                  mProduct = ProductEntry.PRODUCT_TAMARIND_SOAP;
                }
             }
          }
 
          @Override
          public void onNothingSelected(AdapterView<?> parent) {
-            mProduct = 0;
+            mProduct = ProductEntry.PRODUCT_UNKNOWN;
          }
       });
    }
@@ -85,18 +87,18 @@ public class ProductEditor extends AppCompatActivity {
             String selection = (String) adapterView.getItemAtPosition(position);
             if (!TextUtils.isEmpty(selection)) {
                if (selection.equals(getString(R.string.big_size))) {
-                  mSize = 1;
+                  mSize = ProductEntry.SIZE_BIG;
                } else if (selection.equals(getString(R.string.small_size))) {
-                  mSize = 2;
+                  mSize = ProductEntry.SIZE_SMALL;
                } else if (selection.equals(getString(R.string.ml))) {
-                  mSize = 3;
+                  mSize = ProductEntry.SIZE_ML;
                }
             }
          }
 
          @Override
          public void onNothingSelected(AdapterView<?> adapterView) {
-            mSize = 0;
+            mSize = ProductEntry.SIZE_UNKNOWN;
          }
       });
 
