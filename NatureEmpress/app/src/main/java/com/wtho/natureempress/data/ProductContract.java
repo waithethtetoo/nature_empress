@@ -1,5 +1,6 @@
 package com.wtho.natureempress.data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 import com.wtho.natureempress.R;
@@ -8,7 +9,13 @@ public final class ProductContract {
    public ProductContract() {
    }
 
+   public static final String CONTENT_AUTHORITY = "com.wtho.natureempress";
+   public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+   public static final String PRODUCT_PATH = "products";
+
    public static class ProductEntry implements BaseColumns {
+      public static final Uri CONNTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PRODUCT_PATH);
+
       public static final String TABLE_NAME = "products";
       public static final String _ID = BaseColumns._ID;
       public static final String COLUMN_PRODUCT_NAME = "name";
