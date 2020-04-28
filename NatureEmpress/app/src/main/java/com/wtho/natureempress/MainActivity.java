@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.wtho.natureempress.data.ProductContract;
+import com.wtho.natureempress.data.ProductContract.ProductEntry;
 import com.wtho.natureempress.data.ProductDbHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,10 +39,16 @@ public class MainActivity extends AppCompatActivity {
    }
 
    private void displayInfo() {
-
       ProductDbHelper dbHelper = new ProductDbHelper(this);
       SQLiteDatabase database = dbHelper.getReadableDatabase();
-      Cursor cursor = database.rawQuery("SELECT * FROM  " + ProductContract.ProductEntry.TABLE_NAME, null);
+
+      String[] projection = {ProductEntry.COLUMN_PRODUCT_NAME,
+              ProductEntry.COLUMN_PRODUCT_PRICE,
+              ProductEntry.COLUMN_PRODUCT_SIZE};
+      Cursor cursor = getContentResolver().query(
+              ProductEntry.CONNTENT_URI, projection,
+              null, null, null);
+      
       Toast.makeText(this, "Number of row in Product table " + cursor.getCount(), Toast.LENGTH_LONG).show();
    }
 }
