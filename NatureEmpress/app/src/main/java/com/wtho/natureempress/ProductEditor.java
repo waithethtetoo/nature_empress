@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -13,15 +15,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.wtho.natureempress.data.ProductContract.ProductEntry;
+import com.wtho.natureempress.data.ProductDbHelper;
 
 public class ProductEditor extends AppCompatActivity {
 
    private Spinner spinner_product;
    private EditText edtPrice;
    private Spinner spinner_size;
-   private int mProduct = ProductEntry.PRODUCT_UNKNOWN;
+   private String mProduct = ProductEntry.PRODUCT_UNKNOWN;
    private int mSize = ProductEntry.SIZE_UNKNOWN;
 
    @Override
@@ -35,6 +39,7 @@ public class ProductEditor extends AppCompatActivity {
 
       setSpinner_product();
       setSpinner_size();
+
    }
 
    private void setSpinner_product() {
@@ -104,6 +109,25 @@ public class ProductEditor extends AppCompatActivity {
 
    }
 
+   private void insertProduct() {
+      ProductDbHelper dbHelper = new ProductDbHelper(this);
+      SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+      String priceString = edtPrice.getText().toString().trim();
+
+      ContentValues values = new ContentValues();
+      values.put(ProductEntry.COLUMN_PRODUCT_NAME, mProduct);
+      values.put(ProductEntry.COLUMN_PRODUCT_PRICE, priceString);
+      values.put(ProductEntry.COLUMN_PRODUCT_SIZE, mSize);
+
+      long newRowId = database.insert(ProductEntry.TABLE_NAME, null, values);
+      if (newRowId == -1) {
+         Toast.makeText(this, "Error with saving product", Toast.LENGTH_SHORT).show();
+      } else {
+         Toast.makeText(this, "Product saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+      }
+   }
+
    @Override
    public boolean onCreateOptionsMenu(Menu menu) {
       getMenuInflater().inflate(R.menu.menu_product_editor, menu);
@@ -114,6 +138,8 @@ public class ProductEditor extends AppCompatActivity {
    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
       switch (item.getItemId()) {
          case R.id.action_save:
+            insertProduct();
+            finish();
             return true;
          case R.id.action_delete:
             return true;

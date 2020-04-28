@@ -3,17 +3,18 @@ package com.wtho.natureempress;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.wtho.natureempress.data.ProductContract;
 import com.wtho.natureempress.data.ProductDbHelper;
 
 public class MainActivity extends AppCompatActivity {
-   private ProductDbHelper dbHelper;
-   private SQLiteDatabase database;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,19 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
          }
       });
+   }
 
-      dbHelper = new ProductDbHelper(this);
-      database = dbHelper.getReadableDatabase();
+   @Override
+   protected void onStart() {
+      super.onStart();
+      displayInfo();
+   }
+
+   private void displayInfo() {
+
+      ProductDbHelper dbHelper = new ProductDbHelper(this);
+      SQLiteDatabase database = dbHelper.getReadableDatabase();
+      Cursor cursor = database.rawQuery("SELECT * FROM  " + ProductContract.ProductEntry.TABLE_NAME, null);
+      Toast.makeText(this, "Number of row in Product table " + cursor.getCount(), Toast.LENGTH_LONG).show();
    }
 }

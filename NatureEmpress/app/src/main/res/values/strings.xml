@@ -7,7 +7,7 @@
     <string name="action_save">Save</string>
     <string name="action_delete">Delete</string>
 
-
+    <string name="unknown">Unknown</string>
     <string name="shampoo">Herbal Green Tea Shampoo</string>
     <string name="coffee_soap">Coffee Soap</string>
     <string name="white_rice_soap">White Rice Soap</string>

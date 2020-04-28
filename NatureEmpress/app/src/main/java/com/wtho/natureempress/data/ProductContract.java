@@ -2,6 +2,8 @@ package com.wtho.natureempress.data;
 
 import android.provider.BaseColumns;
 
+import com.wtho.natureempress.R;
+
 public final class ProductContract {
    public ProductContract() {
    }
@@ -13,20 +15,21 @@ public final class ProductContract {
       public static final String COLUMN_PRODUCT_SIZE = "size";
       public static final String COLUMN_PRODUCT_PRICE = "price";
 
-      public static final int PRODUCT_UNKNOWN=0;
-      public static final int PRODUCT_SHAMPOO=1;
-      public static final int PRODUCT_COFFEE_SOAP=2;
-      public static final int PRODUCT_WHITE_RICE_SOAP=3;
-      public static final int PRODUCT_BROWN_RICE_SOAP=4;
-      public static final int PRODUCT_TURMERIC_SOAP=5;
-      public static final int PRODUCT_ALOE_VERA_SOAP=6;
-      public static final int PRODUCT_POTATO_SOAP=7;
-      public static final int PRODUCT_ORANGE_SOAP=8;
-      public static final int PRODUCT_TAMARIND_SOAP=9;
+      public static final String PRODUCT_UNKNOWN = String.valueOf(R.string.unknown);
+      ;
+      public static final String PRODUCT_SHAMPOO = String.valueOf(R.string.shampoo);
+      public static final String PRODUCT_COFFEE_SOAP = String.valueOf(R.string.coffee_soap);
+      public static final String PRODUCT_WHITE_RICE_SOAP = String.valueOf(R.string.white_rice_soap);
+      public static final String PRODUCT_BROWN_RICE_SOAP = String.valueOf(R.string.brown_rice_soap);
+      public static final String PRODUCT_TURMERIC_SOAP = String.valueOf(R.string.turmeric_soap);
+      public static final String PRODUCT_ALOE_VERA_SOAP = String.valueOf(R.string.aloe_vera_soap);
+      public static final String PRODUCT_POTATO_SOAP = String.valueOf(R.string.potato_soap);
+      public static final String PRODUCT_ORANGE_SOAP = String.valueOf(R.string.orange_soap);
+      public static final String PRODUCT_TAMARIND_SOAP = String.valueOf(R.string.tamarind_soap);
 
-      public static final int SIZE_UNKNOWN=0;
-      public static final int SIZE_BIG=1;
-      public static final int SIZE_SMALL=2;
-      public static final int SIZE_ML=3;
+      public static final int SIZE_UNKNOWN = 0;
+      public static final int SIZE_BIG = 1;
+      public static final int SIZE_SMALL = 2;
+      public static final int SIZE_ML = 3;
    }
 }
