@@ -3,13 +3,17 @@ package com.wtho.natureempress;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.wtho.natureempress.data.ProductDbHelper;
 
 public class MainActivity extends AppCompatActivity {
+   private ProductDbHelper dbHelper;
+   private SQLiteDatabase database;
 
    @Override
    protected void onCreate(Bundle savedInstanceState) {
@@ -25,5 +29,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
          }
       });
+
+      dbHelper = new ProductDbHelper(this);
+      database = dbHelper.getReadableDatabase();
    }
 }
