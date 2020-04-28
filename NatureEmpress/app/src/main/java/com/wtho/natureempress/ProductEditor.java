@@ -6,6 +6,7 @@ import androidx.core.app.NavUtils;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Menu;
@@ -120,11 +121,11 @@ public class ProductEditor extends AppCompatActivity {
       values.put(ProductEntry.COLUMN_PRODUCT_PRICE, priceString);
       values.put(ProductEntry.COLUMN_PRODUCT_SIZE, mSize);
 
-      long newRowId = database.insert(ProductEntry.TABLE_NAME, null, values);
-      if (newRowId == -1) {
+      Uri newUri = getContentResolver().insert(ProductEntry.CONNTENT_URI, values);
+      if (newUri == null) {
          Toast.makeText(this, "Error with saving product", Toast.LENGTH_SHORT).show();
       } else {
-         Toast.makeText(this, "Product saved with row id: " + newRowId, Toast.LENGTH_SHORT).show();
+         Toast.makeText(this, "Product saved successful.", Toast.LENGTH_SHORT).show();
       }
    }
 

@@ -7,6 +7,8 @@ import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +20,7 @@ public class ProductProvider extends ContentProvider {
    private static final int PRODUCTS = 100;
    private static final int PRODUCT_ID = 101;
    private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+   public static final String LOG_TAG = ProductProvider.class.getSimpleName();
 
    static {
       sUriMatcher.addURI(ProductContract.CONTENT_AUTHORITY,
@@ -65,7 +68,23 @@ public class ProductProvider extends ContentProvider {
    @Nullable
    @Override
    public Uri insert(@NonNull Uri uri, @Nullable ContentValues contentValues) {
-      return null;
+      int match = sUriMatcher.match(uri);
+      switch (match) {
+         case PRODUCTS:
+            return insertProduct(uri, contentValues);
+         default:
+            throw new IllegalArgumentException("Inserting is not supported URI " + uri);
+      }
+   }
+
+   private Uri insertProduct(Uri uri, ContentValues values) {
+      SQLiteDatabase database = dbHelper.getWritableDatabase();
+      long id = database.insert(ProductEntry.TABLE_NAME, null, values);
+      if (id == -1) {
+         Log.e(LOG_TAG, "Fail to insert row " + uri);
+         return null;
+      }
+      return ContentUris.withAppendedId(uri, id);
    }
 
    @Override

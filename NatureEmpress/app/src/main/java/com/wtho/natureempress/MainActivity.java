@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
       Cursor cursor = getContentResolver().query(
               ProductEntry.CONNTENT_URI, projection,
               null, null, null);
-      
+
       Toast.makeText(this, "Number of row in Product table " + cursor.getCount(), Toast.LENGTH_LONG).show();
    }
 }
