@@ -32,19 +32,19 @@ public final class ProductContract {
 
       public static final String PRODUCT_UNKNOWN = String.valueOf(R.string.unknown);
       ;
-      public static final String PRODUCT_SHAMPOO = String.valueOf(R.string.shampoo);
-      public static final String PRODUCT_COFFEE_SOAP = String.valueOf(R.string.coffee_soap);
-      public static final String PRODUCT_WHITE_RICE_SOAP = String.valueOf(R.string.white_rice_soap);
-      public static final String PRODUCT_BROWN_RICE_SOAP = String.valueOf(R.string.brown_rice_soap);
-      public static final String PRODUCT_TURMERIC_SOAP = String.valueOf(R.string.turmeric_soap);
-      public static final String PRODUCT_ALOE_VERA_SOAP = String.valueOf(R.string.aloe_vera_soap);
-      public static final String PRODUCT_POTATO_SOAP = String.valueOf(R.string.potato_soap);
-      public static final String PRODUCT_ORANGE_SOAP = String.valueOf(R.string.orange_soap);
-      public static final String PRODUCT_TAMARIND_SOAP = String.valueOf(R.string.tamarind_soap);
+      public static final String PRODUCT_SHAMPOO = "Herbal Green Tea Shampoo";
+      public static final String PRODUCT_COFFEE_SOAP = "Coffee Soap";
+      public static final String PRODUCT_WHITE_RICE_SOAP = "White Rice Soap";
+      public static final String PRODUCT_BROWN_RICE_SOAP = "Brown Rice Soap";
+      public static final String PRODUCT_TURMERIC_SOAP = "Turmeric Soap";
+      public static final String PRODUCT_ALOE_VERA_SOAP = "Aloe Vera Soap";
+      public static final String PRODUCT_POTATO_SOAP = "Potato Soap";
+      public static final String PRODUCT_ORANGE_SOAP = "Orange Soap";
+      public static final String PRODUCT_TAMARIND_SOAP = "Tamarind Soap";
 
-      public static final int SIZE_UNKNOWN = 0;
-      public static final int SIZE_BIG = 1;
-      public static final int SIZE_SMALL = 2;
-      public static final int SIZE_ML = 3;
+      public static final String SIZE_UNKNOWN = "Unknown";
+      public static final String SIZE_BIG = "Big";
+      public static final String SIZE_SMALL = "Small";
+      public static final String SIZE_ML = "250ml";
    }
 }
