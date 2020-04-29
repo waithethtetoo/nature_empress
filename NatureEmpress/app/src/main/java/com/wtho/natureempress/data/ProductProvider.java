@@ -62,7 +62,16 @@ public class ProductProvider extends ContentProvider {
    @Nullable
    @Override
    public String getType(@NonNull Uri uri) {
-      return null;
+      int match = sUriMatcher.match(uri);
+      switch (match) {
+         case PRODUCTS:
+            return ProductEntry.CONTENT_LIST_TYPE;
+         case PRODUCT_ID:
+            return ProductEntry.CONTENT_ITEM_TYPE;
+         default:
+            throw new IllegalStateException("Unknown URI " + uri + " with match " +
+                    match);
+      }
    }
 
    @Nullable
@@ -92,14 +101,9 @@ public class ProductProvider extends ContentProvider {
    }
 
    @Override
-   public int delete(@NonNull Uri uri, @Nullable String s, @Nullable String[] strings) {
-      return 0;
-   }
-
-   @Override
    public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String selection, @Nullable String[] selectionArgs) {
-      int match=sUriMatcher.match(uri);
-      switch (match){
+      int match = sUriMatcher.match(uri);
+      switch (match) {
          case PRODUCTS:
             break;
          case PRODUCT_ID:
@@ -108,5 +112,21 @@ public class ProductProvider extends ContentProvider {
             throw new IllegalArgumentException("Inserting is not supported URI " + uri);
       }
       return 0;
+   }
+
+   @Override
+   public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
+      SQLiteDatabase database = dbHelper.getWritableDatabase();
+      int match = sUriMatcher.match(uri);
+      switch (match) {
+         case PRODUCTS:
+            return database.delete(ProductEntry.TABLE_NAME, selection, selectionArgs);
+         case PRODUCT_ID:
+            selection = ProductEntry._ID + "=?";
+            selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+            return database.delete(ProductEntry.TABLE_NAME, selection, selectionArgs);
+         default:
+            throw new IllegalArgumentException("Deletion is not supported for " + uri);
+      }
    }
 }
